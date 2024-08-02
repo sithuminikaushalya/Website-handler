@@ -6,9 +6,12 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'WP Table Editor',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -19,13 +22,13 @@ class MyApp extends StatelessWidget {
               color: Colors.blueGrey[800], fontWeight: FontWeight.bold),
           bodyText2: TextStyle(color: Colors.blueGrey[700]),
         ),
-        inputDecorationTheme: InputDecorationTheme(
+        inputDecorationTheme: const InputDecorationTheme(
           border: OutlineInputBorder(),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.blue),
           ),
         ),
-        buttonTheme: ButtonThemeData(
+        buttonTheme: const ButtonThemeData(
           buttonColor: Colors.blue,
           textTheme: ButtonTextTheme.primary,
         ),
@@ -36,7 +39,10 @@ class MyApp extends StatelessWidget {
 }
 
 class DataTableScreen extends StatefulWidget {
+  const DataTableScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _DataTableScreenState createState() => _DataTableScreenState();
 }
 
@@ -85,22 +91,22 @@ class _DataTableScreenState extends State<DataTableScreen> {
           children: [
             TextField(
               controller: typeController,
-              decoration: InputDecoration(labelText: 'Type'),
+              decoration: const InputDecoration(labelText: 'Type'),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: categoryController,
-              decoration: InputDecoration(labelText: 'Category'),
+              decoration: const InputDecoration(labelText: 'Category'),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: nameController,
-              decoration: InputDecoration(labelText: 'Name'),
+              decoration: const InputDecoration(labelText: 'Name'),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: valueController,
-              decoration: InputDecoration(labelText: 'Value'),
+              decoration: const InputDecoration(labelText: 'Value'),
             ),
           ],
         ),
@@ -109,7 +115,7 @@ class _DataTableScreenState extends State<DataTableScreen> {
             onPressed: () {
               Navigator.of(ctx).pop();
             },
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () async {
@@ -130,13 +136,14 @@ class _DataTableScreenState extends State<DataTableScreen> {
                   await updateDetail(id, detailData);
                   _showMessage('Data updated successfully');
                 }
+                // ignore: use_build_context_synchronously
                 Navigator.of(ctx).pop();
                 _loadDetails();
               } catch (e) {
                 _showMessage('Failed to save data: $e');
               }
             },
-            child: Text('Save'),
+            child: const Text('Save'),
           ),
         ],
       ),
@@ -157,7 +164,7 @@ class _DataTableScreenState extends State<DataTableScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       ),
     );
   }
@@ -166,28 +173,28 @@ class _DataTableScreenState extends State<DataTableScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('WP Table Editor'),
+        title: const Text('WP Table Editor'),
         actions: [
           IconButton(
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             onPressed: () => _showEditDialog(null),
           ),
         ],
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: _details.length,
               itemBuilder: (ctx, index) {
                 final detail = _details[index];
                 return Card(
-                  margin: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
                   elevation: 4,
                   child: ListTile(
-                    contentPadding: EdgeInsets.all(16),
+                    contentPadding: const EdgeInsets.all(16),
                     title: Text(
                       detail['name'],
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(
                       'Type: ${detail['type']}, Category: ${detail['category']}, Value: ${detail['value']}',
@@ -196,11 +203,11 @@ class _DataTableScreenState extends State<DataTableScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
-                          icon: Icon(Icons.edit),
+                          icon: const Icon(Icons.edit),
                           onPressed: () => _showEditDialog(detail),
                         ),
                         IconButton(
-                          icon: Icon(Icons.delete),
+                          icon: const Icon(Icons.delete),
                           onPressed: () => _deleteDetail(
                               int.tryParse(detail['id'].toString()) ?? 0),
                         ),
