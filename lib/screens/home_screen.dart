@@ -16,7 +16,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // Trigger the animation periodically
     Timer.periodic(Duration(seconds: 2), (Timer timer) {
       setState(() {
         _animated = !_animated;
@@ -29,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Gradient background with curved design
           Container(
             height: 300,
             decoration: BoxDecoration(
@@ -47,22 +45,31 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(height: 300),
             ),
           ),
-          // Main content
           Column(
             children: [
               AppBar(
-                title: Text('Gold Rate Manager'),
+                title: Text(
+                  'Gold Rate Manager',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                centerTitle: true,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
               ),
-              SizedBox(height: 10), // Small gap below the AppBar
+              SizedBox(height: 10),
               Center(
                 child: Text(
                   'Welcome to Gold Rate Manager',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black.withOpacity(0.7),
+                  ),
                 ),
               ),
-              SizedBox(height: 20), // Small gap below the welcome text
+              SizedBox(height: 20),
               Expanded(
                 child: Center(
                   child: AnimatedContainer(
@@ -128,8 +135,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20), // Add some gap below the button
-              AdBanner(), // Placeholder for an advertisement
+              SizedBox(height: 20),
+              AdBanner(),
             ],
           ),
         ],
