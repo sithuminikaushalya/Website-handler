@@ -14,24 +14,36 @@ class GoldRateTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: goldRate.imagePath.isNotEmpty
-          ? Image.network(goldRate.imagePath)
-          : const Icon(Icons.image),
-      title: Text(goldRate.itemSize),
-      subtitle: Text('Price: ${goldRate.price}'),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.edit),
-            onPressed: onEdit,
-          ),
-          IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: onDelete,
-          ),
-        ],
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+      child: ListTile(
+        leading: ClipOval(
+          child: goldRate.imagePath.isNotEmpty
+              ? Image.network(
+                  goldRate.imagePath,
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      Icon(Icons.error),
+                )
+              : const Icon(Icons.image, size: 50),
+        ),
+        title: Text(goldRate.itemSize),
+        subtitle: Text('Price: ${goldRate.price}'),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: onEdit,
+            ),
+            IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: onDelete,
+            ),
+          ],
+        ),
       ),
     );
   }
